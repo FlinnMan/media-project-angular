@@ -38,8 +38,8 @@
 
       <div>
         <h6>addcomments</h6>
-        <input type="text" placeholder="enter your comment" #commentInput />
-        <button (click)="addcomment(post, commentInput.value); commentInput.value = ''">
+        <input type="text" placeholder="enter your comment" #commentInput (input)="commentInput.value" />
+        <button (click)="addcomment(post, commentInput.value); commentInput.value = ''" [disabled]="!commentInput.value.trim()">
           Add comment
         </button>
       </div>
