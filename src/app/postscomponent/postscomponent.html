@@ -38,13 +38,16 @@
 
       <div>
         <h6>addcomments</h6>
-        <input type="text" placeholder="enter your comment" [(ngModel)]="comment" />
-        <button (click)="addcomment(post)">Add comment</button>
+        <input type="text" placeholder="enter your comment" #commentInput />
+        <button (click)="addcomment(post, commentInput.value); commentInput.value = ''">
+          Add comment
+        </button>
       </div>
       <div>
         <h6>your comments</h6>
-        <ul *ngFor="let comment of post.comments">
+        <ul *ngFor="let comment of post.comments; let i = index">
           <li>{{ comment }}</li>
+          <button (click)="deletecomment(post, i)">delete comment</button>
         </ul>
       </div>
     </div>

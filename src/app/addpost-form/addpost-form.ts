@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Postservice } from '../postservice';
 import { IPost } from '../models/post_model';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-addpost-form',

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { IPost } from '../models/post_model';
 import { Postservice } from '../postservice';
 
@@ -19,22 +18,21 @@ export class Postscomponent implements OnInit {
     this.loadposts();
   }
   deletepost(id: number) {
-    this.postload = this.postload.filter((post) => post.id !== id);
+    this.mypostservice.deletpost(id);
+    this.loadposts();
   }
   postlike(id: number) {
     this.mypostservice.postlike(id);
   }
-  upDatepost(id: number) {
-    const post = this.postload.find((post) => post.id === id);
-    if (post) {
-      post.title = `UpDated Post ${id}`;
-      post.body = 'This is the upDated body of the post.';
-    }
+  updatepost(post: IPost) {
+    this.mypostservice.updatepost(post);
   }
-  comment: string = '';
-  addcomment(post: IPost) {
-    this.mypostservice.addcomment(post, this.comment);
-    this.comment = '';
-    this.loadposts();
+  // comments: { [key: number]: string } = {};
+  addcomment(post: IPost, comment: string) {
+    if (!comment.trim()) return;
+    this.mypostservice.addcomment(post, comment);
+  }
+  deletecomment(post: IPost, i: number) {
+    this.mypostservice.deletecomment(post, i);
   }
 }

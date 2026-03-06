@@ -2,23 +2,26 @@
     display: none;
 }
 
-/* Container */
 .posts-container {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 40px auto;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 25px;
   padding: 0 20px;
+  justify-content: center;
 }
 
-/* Card */
 .post-card {
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: calc(33.333% - 25px);
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
 }
 
 .post-card:hover {

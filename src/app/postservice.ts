@@ -51,10 +51,11 @@ export class Postservice {
 
   addpost(post:IPost){
     const newId = this.posts.length ? Math.max(...this.posts.map(p => p.id)) + 1 : 1;
-    const newPost:IPost = {...post,id:newId };
+    const newPost:IPost = {...post,id:newId, comments: []};
     this.posts.push(newPost);
 
   }
+
   updatepost(updatedPost: IPost) {
     const index = this.posts.findIndex((post) => post.id === updatedPost.id);
     this.posts[index] = { ...updatedPost };
@@ -66,5 +67,8 @@ export class Postservice {
 
   addcomment(post: IPost, coment: string) {
     post.comments.push(coment);
+  }
+  deletecomment(post: IPost, i: number) {
+    post.comments.splice(i, 1);
   }
 }
