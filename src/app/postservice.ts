@@ -49,10 +49,11 @@ export class Postservice {
     this.posts = this.posts.filter((post) => post.id !== id);
   }
 
-  addpost(post: IPost) {
-    const newId = this.posts.length ? Math.max(...this.posts.map((p) => p.id)) + 1 : 1;
-    const newPost: IPost = { ...post, id: newId };
+  addpost(post:IPost){
+    const newId = this.posts.length ? Math.max(...this.posts.map(p => p.id)) + 1 : 1;
+    const newPost:IPost = {...post,id:newId };
     this.posts.push(newPost);
+
   }
   updatepost(updatedPost: IPost) {
     const index = this.posts.findIndex((post) => post.id === updatedPost.id);

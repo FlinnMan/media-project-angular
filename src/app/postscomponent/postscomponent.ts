@@ -21,21 +21,6 @@ export class Postscomponent implements OnInit {
   deletepost(id: number) {
     this.postload = this.postload.filter((post) => post.id !== id);
   }
-  addpost() {
-    const newid = this.postload.length + 1;
-    const newpost: IPost = {
-      id: newid,
-      title: `New Post ${newid}`,
-      body: 'This is the body of the new post.',
-      userId: Math.floor(Math.random() * 5) + 1,
-      Date: new Date(),
-      imgurl:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlGb7i3m0wwZDIimp8-NAuONE2ftlISdXSg&s',
-      likes: 0,
-      comments: [],
-    };
-    this.postload.push(newpost);
-  }
   postlike(id: number) {
     this.mypostservice.postlike(id);
   }
@@ -45,5 +30,11 @@ export class Postscomponent implements OnInit {
       post.title = `UpDated Post ${id}`;
       post.body = 'This is the upDated body of the post.';
     }
+  }
+  comment: string = '';
+  addcomment(post: IPost) {
+    this.mypostservice.addcomment(post, this.comment);
+    this.comment = '';
+    this.loadposts();
   }
 }

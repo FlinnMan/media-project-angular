@@ -28,19 +28,29 @@
     <div class="card-image">
       <img [src]="post.imgurl" alt="post image" />
     </div>
+
     <div class="card-body">
-      <p class="post-text">
-        {{ post.body }}
-      </p>
+      <p class="post-text">{{ post.body }}</p>
 
       <div class="likes-container">
-        <button class="likes-badge" (click)="postlike(post.id)"> {{ post.likes }} likes </button>
+        <button class="likes-badge" (click)="postlike(post.id)">{{ post.likes }} likes</button>
+      </div>
+
+      <div>
+        <h6>addcomments</h6>
+        <input type="text" placeholder="enter your comment" [(ngModel)]="comment" />
+        <button (click)="addcomment(post)">Add comment</button>
+      </div>
+      <div>
+        <h6>your comments</h6>
+        <ul *ngFor="let comment of post.comments">
+          <li>{{ comment }}</li>
+        </ul>
       </div>
     </div>
+
     <div class="card-footer">
       <button class="delete-btn" (click)="deletepost(post.id)">Delete</button>
     </div>
   </div>
-
-  <button class="add-btn" (click)="addpost()">Add New Post</button>
 </div>

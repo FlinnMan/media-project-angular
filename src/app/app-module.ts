@@ -9,9 +9,10 @@ import { Footercomponent } from './footercomponent/footercomponent';
 import { Postscomponent } from './postscomponent/postscomponent';
 import { FormsModule } from '@angular/forms';
 import { UserData } from './user-data/user-data';
+import { AddpostForm } from './addpost-form/addpost-form';
 
 @NgModule({
-  declarations: [App, Navbarcomponent, Footercomponent, Postscomponent, UserData],
+  declarations: [App, Navbarcomponent, Footercomponent, Postscomponent, UserData, AddpostForm],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],
