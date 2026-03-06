@@ -1,0 +1,46 @@
+<!-- <h1>Welcome, {{name}}!</h1> -->
+<!-- <p>Sum = {{sum}} = {{num1 + num2}}</p> -->
+<!-- <P>{{multiply()}}</P> -->
+<!-- property binding -->
+<!-- <img [src]="myimg" alt="yasser"> -->
+<!-- <div [class.notshow] = "active">Class binding</div> -->
+<!-- <button (click)="active=!active">toggle</button> -->
+<!-- <div [style.color]="error?'red':'green'">style binding</div> -->
+<!-- <button (click)="hello()">event</button> -->
+<!-- <input #inputref type="number" [value]="myclickvalue"> the #inputref is local reference (locref) -->
+<!-- <button (click)="setvalue(inputref.value)">set the input value</button> -->
+<!-- <p>{{myclickvalue}}</p> -->
+<!-- <input type="number" (input)="setvaluewithevent($event)">
+<p>{{myinputvalue}}</p> -->
+<!-- <input type="number" [(ngModel)]="myinputvalue"> -->
+<!-- <p>{{myinputvalue}}</p> -->
+<!-- class directives -->
+
+<div class="posts-container">
+  <div class="post-card" *ngFor="let post of postload">
+    <div class="card-header">
+      <div>
+        <app-user-data [Date]="post.Date" [userId]="post.userId"></app-user-data>
+      </div>
+      <h3>{{ post.title }}</h3>
+    </div>
+
+    <div class="card-image">
+      <img [src]="post.imgurl" alt="post image" />
+    </div>
+    <div class="card-body">
+      <p class="post-text">
+        {{ post.body }}
+      </p>
+
+      <div class="likes-container">
+        <button class="likes-badge" (click)="postlike(post.id)"> {{ post.likes }} likes </button>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="delete-btn" (click)="deletepost(post.id)">Delete</button>
+    </div>
+  </div>
+
+  <button class="add-btn" (click)="addpost()">Add New Post</button>
+</div>
