@@ -5,5 +5,5 @@
   <input type="email" formControlName="email">
   <label for="password">password</label>
   <input type="password" formControlName="password">
-  <button type="submit">login</button>
+  <button type="submit" [disabled]="loginForm.invalid">login</button>
 </form>

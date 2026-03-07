@@ -36,6 +36,7 @@
         <button class="likes-badge" (click)="postlike(post.id)">{{ post.likes }} likes</button>
       </div>
 
+      <ng-container *ngIf="myuserservice.authenticated()">
       <div>
         <h6>addcomments</h6>
         <input type="text" placeholder="enter your comment" #commentInput (input)="commentInput.value" />
@@ -43,11 +44,13 @@
           Add comment
         </button>
       </div>
+      </ng-container>
+
       <div>
-        <h6>your comments</h6>
+        <h6>comments</h6>
         <ul *ngFor="let comment of post.comments; let i = index">
           <li>{{ comment }}</li>
-          <button (click)="deletecomment(post, i)">delete comment</button>
+          <button *ngIf="myuserservice.authenticated()" (click)="deletecomment(post, i)">delete comment</button>
         </ul>
       </div>
     </div>
@@ -56,4 +59,7 @@
       <button class="delete-btn" (click)="deletepost(post.id)">Delete</button>
     </div>
   </div>
+  <button class="add-btn" *ngIf="myuserservice.authenticated()" (click)="router.navigate(['/addpost'])">
+  Add Post
+</button>
 </div>

@@ -1,35 +1,35 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Media</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link" routerLink="/posts">Posts</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login">login</a>
+      </ul>
+
+      <ul class="navbar-nav ms-auto align-items-center gap-2">
+        <!-- show when NOT logged in -->
+        <li class="nav-item" *ngIf="!myuserservice.authenticated()">
+          <a class="nav-link" routerLink="/login">Login</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/posts">posts</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-         <li class="nav-item" *ngIf="myuserservice.authenticated()">
-          <button (click)="logout()"> log out</button>
-        </li>
-        <li class="nav-item" *ngIf="myuserservice.authenticated()">
-          <img [src]="myuserservice.getloggeduser()?.imgurl"
-          class="rounded-circle"
-          width="50"
-          >
-        </li>
+
+        <!-- show when logged in -->
+        <ng-container *ngIf="myuserservice.authenticated()">
+          <li class="nav-item">
+            <img [src]="myuserservice.getloggeduser()?.imgurl" class="rounded-circle" width="40" height="40" />
+          </li>
+          <li class="nav-item">
+            <span class="navbar-text">{{ myuserservice.getloggeduser()?.name }}</span>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-danger btn-sm" (click)="logout()">Logout</button>
+          </li>
+        </ng-container>
       </ul>
     </div>
   </div>
 </nav>
-
-

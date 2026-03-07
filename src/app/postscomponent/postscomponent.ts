@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IPost } from '../models/post_model';
 import { Postservice } from '../postservice';
+import { Router } from '@angular/router';
+import { Userservice } from '../userservice';
 
 @Component({
   selector: 'app-postscomponent',
@@ -9,7 +11,7 @@ import { Postservice } from '../postservice';
   styleUrl: './postscomponent.css',
 })
 export class Postscomponent implements OnInit {
-  constructor(private mypostservice: Postservice) {}
+  constructor(private mypostservice: Postservice, public myuserservice: Userservice, public router: Router) {}
   postload: IPost[] = [];
   loadposts() {
     this.postload = this.mypostservice.getposts();
@@ -27,7 +29,7 @@ export class Postscomponent implements OnInit {
   updatepost(post: IPost) {
     this.mypostservice.updatepost(post);
   }
-  // comments: { [key: number]: string } = {};
+
   addcomment(post: IPost, comment: string) {
     if (!comment.trim()) return;
     this.mypostservice.addcomment(post, comment);
@@ -36,3 +38,4 @@ export class Postscomponent implements OnInit {
     this.mypostservice.deletecomment(post, i);
   }
 }
+

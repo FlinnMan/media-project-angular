@@ -14,7 +14,7 @@ export class Postservice {
       Date: new Date(),
       imgurl:
         'https://easydrawingguides.com/wp-content/uploads/2024/06/how-to-draw-an-easy-spider-man-featured-image-1200.png',
-      likes: 0,
+      likes: 15,
       comments: [],
     },
     {
@@ -25,7 +25,7 @@ export class Postservice {
       Date: new Date(),
       imgurl:
         'https://easydrawingguides.com/wp-content/uploads/2024/06/how-to-draw-an-easy-spider-man-featured-image-1200.png',
-      likes: 0,
+      likes: 3,
       comments: [],
     },
     {
@@ -36,7 +36,7 @@ export class Postservice {
       Date: new Date(),
       imgurl:
         'https://easydrawingguides.com/wp-content/uploads/2024/06/how-to-draw-an-easy-spider-man-featured-image-1200.png',
-      likes: 0,
+      likes: 122,
       comments: [],
     },
   ];

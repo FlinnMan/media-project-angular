@@ -6,4 +6,4 @@
   <div *ngIf="body.invalid && body.touched" class="alert alert-danger">body is required</div>
   <button type="submit" [disabled]="postform.invalid">sendpost</button>
 </form>
-<button (click)="toggleForm()">{{ showform ? 'backtoposts' : 'add post' }}</button>
+<a routerLink="/posts">Back to posts</a>

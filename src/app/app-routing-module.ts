@@ -8,7 +8,7 @@ import { authuserGuard } from './authuser-guard';
 
 const routes: Routes = [
   { path: 'login', component: Login },
-  { path: 'posts', component: Postscomponent, canActivate: [authuserGuard] },
+  { path: 'posts', component: Postscomponent},
   { path: '', component: Login },
   { path: 'addpost', component: AddpostForm, canActivate: [authuserGuard] },
   { path: '**', component: NotFound },

@@ -9,10 +9,13 @@ import { Router } from '@angular/router';
   styleUrl: './navbarcomponent.css',
 })
 export class Navbarcomponent {
-  constructor(public myuserservice:Userservice, private router:Router){}
+  constructor(
+    public myuserservice: Userservice,
+    private router: Router,
+  ) {}
 
   logout() {
-    this.myuserservice.logout()
-    this.router.navigate(['/logout'])
+    this.myuserservice.logout();
+    this.router.navigate(['/login']);
   }
 }
