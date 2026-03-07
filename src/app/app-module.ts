@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { UserData } from './user-data/user-data';
 import { AddpostForm } from './addpost-form/addpost-form';
 import { Login } from './login/login';
+import { NotFound } from './not-found/not-found';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { Login } from './login/login';
     UserData,
     AddpostForm,
     Login,
+    NotFound,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [provideBrowserGlobalErrorListeners()],

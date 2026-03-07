@@ -10,22 +10,24 @@ import { Userservice } from '../userservice';
 export class Login {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private myuserservice:Userservice) {
+  constructor(
+    private fb: FormBuilder,
+    private myuserservice: Userservice,
+  ) {
     this.loginForm = this.fb.group({
-      username: ['',[Validators.required, Validators.minLength(3)]],
-      email: ['',[Validators.required, Validators.email]],
-      password: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
     });
   }
 
-  name:string = '';
-  email:string = '';
-  password:string = '';
-
   login() {
-    const loginuser=this.myuserservice.login(this.name, this.email, this.password)
-
-    this.myuserservice.setloginuser(loginuser!)
-
+    if (this.loginForm.valid) {
+      const { username, email, password } = this.loginForm.value;
+      const loginuser = this.myuserservice.login(username, email, password);
+      if (loginuser) {
+        this.myuserservice.setloginuser(loginuser);
+      }
+    }
   }
 }

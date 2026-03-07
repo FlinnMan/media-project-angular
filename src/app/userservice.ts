@@ -49,6 +49,7 @@ export class Userservice {
     return this.users.find((u) => u.name === name && u.email === email && u.password === password);
   }
   loggeduser: IUser | null = null;
+  
   setloginuser(user: IUser) {
     this.loggeduser=user
     localStorage.setItem('user', JSON.stringify(user));
