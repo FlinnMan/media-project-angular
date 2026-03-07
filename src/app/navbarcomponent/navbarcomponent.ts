@@ -13,7 +13,7 @@ export class Navbarcomponent {
     public myuserservice: Userservice,
     private router: Router,
   ) {}
-
+  menuOpen = false;
   logout() {
     this.myuserservice.logout();
     this.router.navigate(['/login']);

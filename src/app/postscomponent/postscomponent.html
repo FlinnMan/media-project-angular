@@ -37,20 +37,34 @@
       </div>
 
       <ng-container *ngIf="myuserservice.authenticated()">
-      <div>
-        <h6>addcomments</h6>
-        <input type="text" placeholder="enter your comment" #commentInput (input)="commentInput.value" />
-        <button (click)="addcomment(post, commentInput.value); commentInput.value = ''" [disabled]="!commentInput.value.trim()">
-          Add comment
-        </button>
-      </div>
+        <div class="comments-section">
+          <h6>Add comment</h6>
+          <div class="comment-input-row">
+            <input
+              type="text"
+              placeholder="Write a comment..."
+              #commentInput
+              (input)="(commentInput.value)"
+            />
+            <button
+              (click)="addcomment(post, commentInput.value); commentInput.value = ''"
+              [disabled]="!commentInput.value.trim()"
+            >
+              Post
+            </button>
+          </div>
+        </div>
       </ng-container>
 
-      <div>
-        <h6>comments</h6>
-        <ul *ngFor="let comment of post.comments; let i = index">
-          <li>{{ comment }}</li>
-          <button *ngIf="myuserservice.authenticated()" (click)="deletecomment(post, i)">delete comment</button>
+      <div class="comments-section">
+        <h6>Comments</h6>
+        <ul class="comment-list">
+          <li class="comment-item" *ngFor="let comment of post.comments; let i = index">
+            <span>{{ comment }}</span>
+            <button *ngIf="myuserservice.authenticated()" (click)="deletecomment(post, i)">
+              ✕
+            </button>
+          </li>
         </ul>
       </div>
     </div>
@@ -59,7 +73,7 @@
       <button class="delete-btn" (click)="deletepost(post.id)">Delete</button>
     </div>
   </div>
-  <button class="add-btn" *ngIf="myuserservice.authenticated()" (click)="router.navigate(['/addpost'])">
-  Add Post
-</button>
+  <button class="add-post-btn" *ngIf="myuserservice.authenticated()" routerLink="/addpost">
+    + Add Post
+  </button>
 </div>

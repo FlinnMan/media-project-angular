@@ -1,9 +1,24 @@
-<form *ngIf="showform" (ngSubmit)="addpost()" #postform="ngForm">
-  <label> title</label>
-  <input type="text" name="title" [(ngModel)]="newpost.title" #title="ngModel" required />
-  <div *ngIf="title.invalid && title.touched" class="alert alert-danger">title is required</div>
-  <input type="text" name="body" [(ngModel)]="newpost.body" #body="ngModel" required />
-  <div *ngIf="body.invalid && body.touched" class="alert alert-danger">body is required</div>
-  <button type="submit" [disabled]="postform.invalid">sendpost</button>
-</form>
-<a routerLink="/posts">Back to posts</a>
+<div class="addpost-container">
+  <h2>New Post</h2>
+  <form (ngSubmit)="addpost()" #postform="ngForm">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" name="title" [(ngModel)]="newpost.title" #title="ngModel" required />
+      <span *ngIf="title.invalid && title.touched" class="alert">Title is required</span>
+    </div>
+    <div class="form-group">
+      <label>Body</label>
+      <textarea name="body" rows="4" [(ngModel)]="newpost.body" #body="ngModel" required></textarea>
+      <span *ngIf="body.invalid && body.touched" class="alert">Body is required</span>
+    </div>
+    <div class="form-group">
+      <label>Image URL</label>
+      <input type="url" name="imgurl" [(ngModel)]="newpost.imgurl" #imgurl="ngModel" required />
+      <span *ngIf="imgurl.invalid && imgurl.touched" class="alert">Image URL is required</span>
+    </div>
+    <div class="form-actions">
+      <a routerLink="/posts" class="back-btn">Back to Posts</a>
+      <button type="submit" class="submit-btn" [disabled]="postform.invalid">Publish</button>
+    </div>
+  </form>
+</div>

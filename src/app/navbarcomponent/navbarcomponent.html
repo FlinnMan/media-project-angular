@@ -1,35 +1,27 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Media</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/posts">Posts</a>
-        </li>
-      </ul>
+<nav class="navbar">
+  <div class="nav-brand">
+    <span class="brand-dot"></span>
+    MediaHub
+  </div>
 
-      <ul class="navbar-nav ms-auto align-items-center gap-2">
-        <!-- show when NOT logged in -->
-        <li class="nav-item" *ngIf="!myuserservice.authenticated()">
-          <a class="nav-link" routerLink="/login">Login</a>
-        </li>
+  <button class="burger" (click)="menuOpen = !menuOpen" [class.open]="menuOpen">
+    <span></span><span></span><span></span>
+  </button>
 
-        <!-- show when logged in -->
-        <ng-container *ngIf="myuserservice.authenticated()">
-          <li class="nav-item">
-            <img [src]="myuserservice.getloggeduser()?.imgurl" class="rounded-circle" width="40" height="40" />
-          </li>
-          <li class="nav-item">
-            <span class="navbar-text">{{ myuserservice.getloggeduser()?.name }}</span>
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-outline-danger btn-sm" (click)="logout()">Logout</button>
-          </li>
-        </ng-container>
-      </ul>
-    </div>
+  <div class="nav-links" [class.active]="menuOpen">
+    <a routerLink="/posts" routerLinkActive="active" (click)="menuOpen = false">Posts</a>
+
+    <ng-container *ngIf="!myuserservice.authenticated()">
+      <a routerLink="/login" routerLinkActive="active" (click)="menuOpen = false">Login</a>
+    </ng-container>
+
+    <ng-container *ngIf="myuserservice.authenticated()">
+      <a routerLink="/addpost" routerLinkActive="active" (click)="menuOpen = false">Add Post</a>
+      <div class="nav-user">
+        <img [src]="myuserservice.getloggeduser()?.imgurl" alt="avatar" class="nav-avatar" />
+        <span>{{ myuserservice.getloggeduser()?.name }}</span>
+        <button class="logout-btn" (click)="logout()">Logout</button>
+      </div>
+    </ng-container>
   </div>
 </nav>

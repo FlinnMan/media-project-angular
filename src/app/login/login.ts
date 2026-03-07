@@ -23,16 +23,18 @@ export class Login {
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
     });
   }
+  loginerror = false;
 
   login() {
     if (this.loginForm.valid) {
       const { username, email, password } = this.loginForm.value;
       const loginuser = this.myuserservice.login(username, email, password);
-
-
       if (loginuser) {
+        this.loginerror = false;
         this.myuserservice.setloginuser(loginuser);
         this.router.navigate(['/posts']);
+      } else {
+        this.loginerror = true;
       }
     }
   }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Postservice } from '../postservice';
 import { IPost } from '../models/post_model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addpost-form',
@@ -13,7 +14,7 @@ export class AddpostForm {
     this.showform = !this.showform;
   }
 
-  constructor(private mypostservice: Postservice) {}
+  constructor(private mypostservice: Postservice, private router: Router) {}
 
   showform: boolean = true;
   newpost: IPost = {
@@ -23,12 +24,13 @@ export class AddpostForm {
     userId: Math.floor(Math.random() * 5) + 1,
     Date: new Date(),
     imgurl:
-      'https://easydrawingguides.com/wp-content/uploads/2024/06/how-to-draw-an-easy-spider-man-featured-image-1200.png',
+      '',
     likes: 0,
     comments: [],
   };
 
   addpost() {
-    this.mypostservice.addpost(this.newpost);
-  }
+  this.mypostservice.addpost(this.newpost);
+  this.router.navigate(['/posts']);
+}
 }
