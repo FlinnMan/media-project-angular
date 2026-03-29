@@ -1,0 +1,99 @@
+.profile-container {
+  max-width: 680px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.profile-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  margin-bottom: 1rem;
+}
+
+.profile-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.profile-email {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.profile-posts h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.no-posts {
+  color: var(--muted);
+  text-align: center;
+  padding: 2rem;
+}
+
+.post-item {
+  display: flex;
+  gap: 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.post-item:hover {
+  transform: translateY(-2px);
+}
+
+.post-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.post-info h4 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.post-info p {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.likes-badge {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  background: var(--accent);
+  color: #000;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.back-btn:hover {
+  filter: brightness(1.1);
+}

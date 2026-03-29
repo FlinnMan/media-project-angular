@@ -1,74 +1,53 @@
 import { Injectable } from '@angular/core';
 import { IPost } from './models/post_model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Postservice {
-  posts: IPost[] = [
-    {
-      id: 1,
-      title: 'first post',
-      body: 'this is the first post',
-      userId: 1,
-      Date: new Date(),
-      imgurl:
-        'https://easydrawingguides.com/wp-content/uploads/2024/06/how-to-draw-an-easy-spider-man-featured-image-1200.png',
-      likes: 15,
-      comments: [],
-    },
-    {
-      id: 2,
-      title: ' post num 2',
-      body: 'this body of post',
-      userId: 4,
-      Date: new Date(),
-      imgurl:
-        'https://easydrawingguides.com/wp-content/uploads/2024/06/how-to-draw-an-easy-spider-man-featured-image-1200.png',
-      likes: 3,
-      comments: [],
-    },
-    {
-      id: 3,
-      title: ' post num 3',
-      body: 'this is body of post',
-      userId: 2,
-      Date: new Date(),
-      imgurl:
-        'https://easydrawingguides.com/wp-content/uploads/2024/06/how-to-draw-an-easy-spider-man-featured-image-1200.png',
-      likes: 122,
-      comments: [],
-    },
-  ];
+  private baseurl = 'http://localhost:3000/posts';
 
-  getposts() {
-    return this.posts;
+  constructor(private http: HttpClient) {}
+
+  getposts(): Observable<IPost[]> {
+    return this.http.get<IPost[]>(this.baseurl);
   }
 
-  deletpost(id: number) {
-    this.posts = this.posts.filter((post) => post.id !== id);
+  getpostbyid(id: number): Observable<IPost> {
+    return this.http.get<IPost>(`${this.baseurl}/${id}`);
   }
 
-  addpost(post:IPost){
-    const newId = this.posts.length ? Math.max(...this.posts.map(p => p.id)) + 1 : 1;
-    const newPost:IPost = {...post,id:newId, comments: []};
-    this.posts.push(newPost);
-
+  getpostsbyuser(userId: number): Observable<IPost[]> {
+    return this.http.get<IPost[]>(`${this.baseurl}?userId=${userId}`);
   }
 
-  updatepost(updatedPost: IPost) {
-    const index = this.posts.findIndex((post) => post.id === updatedPost.id);
-    this.posts[index] = { ...updatedPost };
-  }
-  postlike(id: number) {
-    const index = this.posts.findIndex((post) => post.id === id);
-    this.posts[index].likes += 1;
+  addpost(post: IPost): Observable<IPost> {
+    return this.http.post<IPost>(this.baseurl, post);
   }
 
-  addcomment(post: IPost, coment: string) {
-    post.comments.push(coment);
+  deletpost(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseurl}/${id}`);
   }
-  deletecomment(post: IPost, i: number) {
-    post.comments.splice(i, 1);
+
+  postlike(post: IPost): Observable<IPost> {
+    return this.http.patch<IPost>(`${this.baseurl}/${post.id}`, {
+      likes: post.likes + 1,
+    });
+  }
+
+  addcomment(post: IPost, comment: string): Observable<IPost> {
+    return this.http.patch<IPost>(`${this.baseurl}/${post.id}`, {
+      comments: [...post.comments, comment],
+    });
+  }
+
+  deletecomment(post: IPost, index: number): Observable<IPost> {
+    const updatedcomments = [...post.comments];
+    updatedcomments.splice(index, 1);
+    return this.http.patch<IPost>(`${this.baseurl}/${post.id}`, {
+      comments: updatedcomments,
+    });
   }
 }

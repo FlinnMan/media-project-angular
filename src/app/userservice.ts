@@ -1,67 +1,47 @@
 import { Injectable } from '@angular/core';
 import { IUser } from './models/iuser';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Userservice {
-  users: IUser[] = [
-    {
-      id: 1,
-      name: 'Amr',
-      email: 'amr@gmail.com',
-      imgurl: 'https://i.pravatar.cc/150?img=1',
-      password: 'a1234',
-    },
-    {
-      id: 2,
-      name: 'Bob Smith',
-      email: 'mahmoud@gmail.com',
-      imgurl: 'https://i.pravatar.cc/150?img=2',
-      password: 'bob456',
-    },
-    {
-      id: 3,
-      name: 'Charlie Brown',
-      email: 'amro@gmail.com',
-      imgurl: 'https://i.pravatar.cc/150?img=3',
-      password: 'charlie789',
-    },
-    {
-      id: 4,
-      name: 'Diana Prince',
-      email: 'amroo@gmail.com',
-      imgurl: 'https://i.pravatar.cc/150?img=4',
-      password: 'diana321',
-    },
-    {
-      id: 5,
-      name: 'Ethan Hunt',
-      email: 'marwan@gmail.com',
-      imgurl: 'https://i.pravatar.cc/150?img=5',
-      password: 'ethan007',
-    },
-  ];
-  getuserbyid(userId: number) {
-    return this.users.find((user) => user.id === userId);
+  private baseurl = 'http://localhost:3000/users';
+
+  constructor(private http: HttpClient) {}
+
+  getusers(): Observable<IUser[]> {
+    return this.http.get<IUser[]>(this.baseurl);
   }
-  login(name: string, email: string, password: string) {
-    return this.users.find((u) => u.name === name && u.email === email && u.password === password);
+
+  getuserbyid(userId: number): Observable<IUser> {
+    return this.http.get<IUser>(`${this.baseurl}/${userId}`);
   }
+
+  login(name: string, email: string, password: string): Observable<IUser[]> {
+    return this.http.get<IUser[]>(
+      `${this.baseurl}?name=${name}&email=${email}&password=${password}`
+    );
+  }
+
   loggeduser: IUser | null = null;
 
   setloginuser(user: IUser) {
-    this.loggeduser=user
+    this.loggeduser = user;
     localStorage.setItem('user', JSON.stringify(user));
   }
-  getloggeduser(){
-    return this.loggeduser||JSON.parse(localStorage.getItem('user')!)
+
+  getloggeduser() {
+    return this.loggeduser || JSON.parse(localStorage.getItem('user')!);
   }
-  logout(){
-    this.loggeduser=null
-    localStorage.removeItem('user')
+
+  logout() {
+    this.loggeduser = null;
+    localStorage.removeItem('user');
   }
-  authenticated():boolean{
-    return this.getloggeduser()!=null;
+
+  authenticated(): boolean {
+    return this.getloggeduser() != null;
   }
 }

@@ -1,6 +1,5 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { IUser } from '../models/iuser';
-import { Data } from '@angular/router';
 import { Userservice } from '../userservice';
 
 @Component({
@@ -12,7 +11,6 @@ import { Userservice } from '../userservice';
 export class UserData implements OnChanges {
   constructor(private myuserservice: Userservice) {}
 
-  userload: IUser[] = [];
   user!: IUser;
   @Input() userId!: number;
   @Input() Date!: Date;
@@ -22,6 +20,11 @@ export class UserData implements OnChanges {
   }
 
   getuserbyid(userId: number) {
-    return this.user = this.myuserservice.getuserbyid(userId) as IUser;
+    this.myuserservice.getuserbyid(userId).subscribe({
+      next: (user) => {
+        this.user = user;
+      },
+      error: (err) => console.log('error loading user', err),
+    });
   }
 }

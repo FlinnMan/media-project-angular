@@ -1,0 +1,19 @@
+<div class="details-container" *ngIf="post">
+  <div class="details-card">
+    <img [src]="post.imgurl" alt="post image" class="details-img" />
+    <div class="details-body">
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.body }}</p>
+      <span class="likes-badge"> {{ post.likes }} likes</span>
+
+      <div class="comments-section" *ngIf="post.comments.length > 0">
+        <h6>Comments</h6>
+        <ul class="comment-list">
+          <li *ngFor="let comment of post.comments">{{ comment }}</li>
+        </ul>
+      </div>
+
+      <a routerLink="/posts" class="back-btn">← Back to Posts</a>
+    </div>
+  </div>
+</div>

@@ -22,7 +22,7 @@
       <div>
         <app-user-data [Date]="post.Date" [userId]="post.userId"></app-user-data>
       </div>
-      <h3>{{ post.title }}</h3>
+      <h3 [routerLink]="['/post', post.id]" style="cursor:pointer">{{ post.title }}</h3>
     </div>
 
     <div class="card-image">
@@ -33,7 +33,7 @@
       <p class="post-text">{{ post.body }}</p>
 
       <div class="likes-container">
-        <button class="likes-badge" (click)="postlike(post.id)">{{ post.likes }} likes</button>
+        <button class="likes-badge" [disabled]="!myuserservice.authenticated()" (click)="postlike(post)">{{ post.likes }} likes</button>
       </div>
 
       <ng-container *ngIf="myuserservice.authenticated()">
@@ -70,7 +70,7 @@
     </div>
 
     <div class="card-footer">
-      <button class="delete-btn" (click)="deletepost(post.id)">Delete</button>
+      <button class="delete-btn" *ngIf="myuserservice.authenticated()" (click)="deletepost(post.id)">Delete</button>
     </div>
   </div>
   <button class="add-post-btn" *ngIf="myuserservice.authenticated()" routerLink="/addpost">

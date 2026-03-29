@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Userservice } from '../userservice';
 import { Router } from '@angular/router';
 
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class Login {
   loginForm: FormGroup;
+  loginerror = false;
 
   constructor(
     private fb: FormBuilder,
@@ -23,19 +24,22 @@ export class Login {
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
     });
   }
-  loginerror = false;
 
   login() {
     if (this.loginForm.valid) {
       const { username, email, password } = this.loginForm.value;
-      const loginuser = this.myuserservice.login(username, email, password);
-      if (loginuser) {
-        this.loginerror = false;
-        this.myuserservice.setloginuser(loginuser);
-        this.router.navigate(['/posts']);
-      } else {
-        this.loginerror = true;
-      }
+      this.myuserservice.login(username, email, password).subscribe({
+        next: (users) => {
+          if (users.length > 0) {
+            this.loginerror = false;
+            this.myuserservice.setloginuser(users[0]);
+            this.router.navigate(['/posts']);
+          } else {
+            this.loginerror = true;
+          }
+        },
+        error: (err) => console.log('login error', err),
+      });
     }
   }
 }

@@ -1,0 +1,22 @@
+<div class="profile-container" *ngIf="user">
+  <div class="profile-card">
+    <img [src]="user.imgurl" alt="avatar" class="profile-avatar" />
+    <h2>{{ user.name | capitalize }}</h2>
+    <p class="profile-email">{{ user.email }}</p>
+  </div>
+
+  <div class="profile-posts">
+    <h3>Posts by {{ user.name | capitalize }}</h3>
+    <div *ngIf="posts.length === 0" class="no-posts">No posts yet.</div>
+    <div class="post-item" *ngFor="let post of posts" [routerLink]="['/post', post.id]" appHighlight>
+      <img [src]="post.imgurl" alt="post image" class="post-thumb" />
+      <div class="post-info">
+        <h4>{{ post.title }}</h4>
+        <p>{{ post.body }}</p>
+        <span class="likes-badge">♥ {{ post.likes }}</span>
+      </div>
+    </div>
+  </div>
+
+  <a routerLink="/posts" class="back-btn">← Back to Posts</a>
+</div>
